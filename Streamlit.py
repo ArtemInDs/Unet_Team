@@ -163,9 +163,9 @@ def page1():
     st.subheader("Объем выборки: 13.386 изображений")
     st.subheader("Метрики")
 
-    st.image("/home/artem/Загрузки/confusion_matrix.png")
-    st.image("/home/artem/Загрузки/results(1).png")
-    st.image("/home/artem/Загрузки/F1_curve(2).png")
+    st.image("metrics/confusion_matrixA.png")
+    st.image("metrics/resultsA.png")
+    st.image("metrics/F1_curveA.png")
 
 def page2():
     st.title("Детекции опухулей 🧠")
@@ -250,93 +250,93 @@ def page2():
     st.subheader("Объем выборки: 893 изображений")
     st.subheader("Метрики")
 
-    st.image("/home/artem/Загрузки/Дима/confusion_matrix.png")
-    st.image("/home/artem/Загрузки/Дима/results.png")
-    st.image("/home/artem/Загрузки/Дима/F1_curve.png")
+    st.image("metrics/confusion_matrixD.png")
+    st.image("metrics/resultsD.png")
+    st.image("metrics/F1_curveD.png")
 
 
 def page3():
     st.title("Сегментация аэрокосмических снимков 🌎")
 
-    # # Загрузка изображений
-    # uploaded_files = st.file_uploader(
-    #     "Загрузи одно или несколько изображений:", 
-    #     type=["png", "jpg", "jpeg"], 
-    #     accept_multiple_files=True
-    # )
+    # Загрузка изображений
+    uploaded_files = st.file_uploader(
+        "Загрузи одно или несколько изображений:", 
+        type=["png", "jpg", "jpeg"], 
+        accept_multiple_files=True
+    )
 
-    # if uploaded_files:
-    #     for uploaded_file in uploaded_files:
-    #         # Конвертация загруженного файла в PIL.Image
-    #         image = Image.open(uploaded_file)
+    if uploaded_files:
+        for uploaded_file in uploaded_files:
+            # Конвертация загруженного файла в PIL.Image
+            image = Image.open(uploaded_file)
             
-    #         # Отображение исходного изображения
-    #         st.subheader("Исходное изображение:")
-    #         st.image(image, caption="Исходное изображение", use_container_width=True)
+            # Отображение исходного изображения
+            st.subheader("Исходное изображение:")
+            st.image(image, caption="Исходное изображение", use_container_width=True)
 
-    #         # Преобразование изображения в формат NumPy и конвертация RGB -> BGR
-    #         image_np = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+            # Преобразование изображения в формат NumPy и конвертация RGB -> BGR
+            image_np = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
 
-    #         # Обработка изображения моделью YOLO
-    #         results = Model3.predict(source=image_np, conf=0.3)  # conf - порог уверенности
+            # Обработка изображения моделью YOLO
+            results = Model3.predict(source=image_np, conf=0.3)  # conf - порог уверенности
 
-    #         # Вывод результатов
-    #         st.subheader("Результаты детекции:")
-    #         for result in results:
-    #             # Получение изображения с нарисованными bounding box'ами
-    #             result_image = result.plot()  # plot() возвращает изображение с разметкой
+            # Вывод результатов
+            st.subheader("Результаты детекции:")
+            for result in results:
+                # Получение изображения с нарисованными bounding box'ами
+                result_image = result.plot()  # plot() возвращает изображение с разметкой
                 
-    #             # Конвертация обратно из BGR в RGB для отображения в Streamlit
-    #             result_image_rgb = cv2.cvtColor(result_image, cv2.COLOR_BGR2RGB)
+                # Конвертация обратно из BGR в RGB для отображения в Streamlit
+                result_image_rgb = cv2.cvtColor(result_image, cv2.COLOR_BGR2RGB)
                 
-    #             # Отображение результата
-    #             st.image(result_image_rgb, caption="Результат детекции", use_container_width=True)
+                # Отображение результата
+                st.image(result_image_rgb, caption="Результат детекции", use_container_width=True)
 
 
-    # # Функция для обработки изображений по URL
-    # def process_url_image(url):
-    #     try:
-    #         # Скачивание изображения по URL
-    #         response = requests.get(url)
-    #         response.raise_for_status()  # Проверка на ошибки при запросе
+    # Функция для обработки изображений по URL
+    def process_url_image(url):
+        try:
+            # Скачивание изображения по URL
+            response = requests.get(url)
+            response.raise_for_status()  # Проверка на ошибки при запросе
 
-    #         # Открытие изображения из байтов
-    #         image = Image.open(BytesIO(response.content))
+            # Открытие изображения из байтов
+            image = Image.open(BytesIO(response.content))
 
-    #         # Отображение исходного изображения
-    #         st.subheader("Исходное изображение (по URL):")
-    #         st.image(image, caption="Исходное изображение", use_container_width=True)
+            # Отображение исходного изображения
+            st.subheader("Исходное изображение (по URL):")
+            st.image(image, caption="Исходное изображение", use_container_width=True)
 
-    #         # Преобразование изображения в формат NumPy и конвертация RGB -> BGR
-    #         image_np = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+            # Преобразование изображения в формат NumPy и конвертация RGB -> BGR
+            image_np = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
 
-    #         # Обработка изображения моделью YOLO
-    #         results = model2.predict(source=image_np, conf=0.3)  # conf - порог уверенности
+            # Обработка изображения моделью YOLO
+            results = model2.predict(source=image_np, conf=0.3)  # conf - порог уверенности
 
-    #         # Вывод результатов
-    #         st.subheader("Результаты детекции:")
-    #         for result in results:
-    #             # Получение изображения с нарисованными bounding box'ами
-    #             result_image = result.plot()  # plot() возвращает изображение с разметкой
+            # Вывод результатов
+            st.subheader("Результаты детекции:")
+            for result in results:
+                # Получение изображения с нарисованными bounding box'ами
+                result_image = result.plot()  # plot() возвращает изображение с разметкой
                 
-    #             # Конвертация обратно из BGR в RGB для отображения в Streamlit
-    #             result_image_rgb = cv2.cvtColor(result_image, cv2.COLOR_BGR2RGB)
+                # Конвертация обратно из BGR в RGB для отображения в Streamlit
+                result_image_rgb = cv2.cvtColor(result_image, cv2.COLOR_BGR2RGB)
                 
-    #             # Отображение результата
-    #             st.image(result_image_rgb, caption="Результат детекции", use_container_width=True)
+                # Отображение результата
+                st.image(result_image_rgb, caption="Результат детекции", use_container_width=True)
 
-    #     except Exception as e:
-    #         st.error(f"Ошибка при загрузке изображения по URL: {e}")
+        except Exception as e:
+            st.error(f"Ошибка при загрузке изображения по URL: {e}")
 
-    # # Поле для ввода URL
-    # url = st.text_input("Введи ссылку на изображение:")
-    # if url:
-    #     st.write("Обработка изображения по URL...")
-    #     process_url_image(url)
+    # Поле для ввода URL
+    url = st.text_input("Введи ссылку на изображение:")
+    if url:
+        st.write("Обработка изображения по URL...")
+        process_url_image(url)
 
-    # st.subheader("Число эпох обучения: 5")
-    # st.subheader("Объем выборки: 5.000")
-    # st.subheader("Метрики")
+    st.subheader("Число эпох обучения: 5")
+    st.subheader("Объем выборки: 5.000")
+    st.subheader("Метрики")
 
 
 def main():
