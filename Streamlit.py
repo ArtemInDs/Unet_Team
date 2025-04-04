@@ -12,7 +12,7 @@ DEVICE = "cpu"
 
 model1 = YOLO("Models/yolo666.pt")
 model2 = YOLO("Models/yolo_1.pt")
-Model3 = torch.jit.load('/home/artem/Рабочий стол/Проект/Models/best_model_new.pt', map_location=DEVICE)
+Model3 = torch.jit.load('Models/best_model_new.pt', map_location=DEVICE)
 
 def mask_faces(image_np):
     """
